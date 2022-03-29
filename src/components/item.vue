@@ -1,6 +1,6 @@
 <script lang="ts">
-
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
     props: ['item'],
     emits: ['countSingleItem' , 'item'] , 
 
@@ -32,7 +32,7 @@ export default {
             this.countSingleItem = 0;
         }
     },
-}
+})
 </script>
 
 <template>
@@ -40,7 +40,7 @@ export default {
 
         <h2 class="text-center p-3">{{  item.name }}</h2>
         <div style="width: 100%;">
-            <img :alt="item.name" style="width:100%" >
+            <img src="/images/image1.jpg" style="width:100%" >
         </div>     
 
         <div class="absolute -bottom-8 right-4 hover:right-6">
@@ -50,7 +50,7 @@ export default {
         </div>
 
         <div class="flex m-1 justify-center items-baseline mt-4 mb-4">
-            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="increment">+</button>
+            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="this.increment">+</button>
             <span class="m-2">
                 {{ this.countSingleItem }}
             </span> 
