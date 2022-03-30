@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
 
 export const useCartStore = defineStore({
-    id: 'id',
+    id: 'cart',
     state :()=>({
         numberOfItem: 0,
         cart: []
     }),
     getters: {
-        getNumberOfItems: (state) => {
-            return state.numberOfItem
-        }
-    },
+        numberOfItemsInCart: (state) => { 
+            return state.cart.reduce(( acc , val ) => acc + val.numberOfItem, 0)
+        }, 
+      },
     actions: {
         addNumberOfItem() {
             if(this.numberOfItem <=0) return

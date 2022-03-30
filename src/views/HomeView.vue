@@ -7,7 +7,7 @@ export default  {
     setup() {
         const productStore = useProductStore()
         const products = productStore. getAllProducts()
-
+        
         return {
             productStore,
             products

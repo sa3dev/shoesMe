@@ -1,35 +1,17 @@
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { mapState } from 'pinia'
 import { useCartStore } from './stores/cart'
-
-// export default {
-//   data() {
-//     return {
-//       show: true,
-//     }
-//   },
-//   methods: {
-//     getCart() {
-//       mapState(useCartStore , ["getStatusCart"])
-//     },
-//     nummberofItemsSelectedToSpan() {
-//       mapState(useCartStore , ["getNumberOfItems"])
-//     }
-//   },
-// }
 
 export default {
   setup() {
-    const cartStore = useCartStore
+    const cartStore = useCartStore()
+    const itemsInCart = cartStore.numberOfItemsInCart
 
     return {
-      cartStore
+      cartStore,
+      itemsInCart
     }
   },
-  method: {
- 
-  }
+  
 }
 </script>
 
@@ -41,16 +23,10 @@ export default {
         <RouterLink class="m-5" activeClass="active " to="/contact">Contact</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/our-store">Our stores</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/employee">Our Employee</RouterLink>
-        <RouterLink class="m-5" activeClass="active" to="/cart">Cart</RouterLink>
+        <RouterLink class="m-5" activeClass="active" to="/cart">Cart </RouterLink>
       </nav>
       <div> 
-        <RouterLink  activeClass="active" to="/login" v-if="this.show">Login</RouterLink>
-          <button v-else >
-            <span>
-              <i></i>
-              Logout
-            </span>  
-          </button>
+        <RouterLink  activeClass="active" to="/login">Login</RouterLink>
       </div>
     </div>
   </header>
