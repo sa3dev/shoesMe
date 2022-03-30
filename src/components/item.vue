@@ -10,10 +10,10 @@ export default defineComponent({
         }
     },
     methods:{
-        priceSelectedItem: ( price: number )=> {
+        priceSelectedItem( price: number ) {
             return price * +(this.countSingleItem)
         },
-        increment: ()=>{
+        increment() {
             this.countSingleItem++
             this.$emit('countSingleItem')
         },
@@ -32,11 +32,20 @@ export default defineComponent({
             this.countSingleItem = 0;
         }
     },
+    computed: {
+        notAllowedCursor() {
+            return {
+                'cursor-not-allowed' : this.countSingleItem < 0
+            }
+        }
+    },
 })
 </script>
 
 <template>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg p-5 m-6 border border-indigo-600 relative overflow-visible" >
+    <div class="rounded overflow-hidden shadow-lg p-5 m-6 border border-indigo-600 relative overflow-visible " >
+
+
 
         <h2 class="text-center p-3">{{  item.name }}</h2>
         <div style="width: 100%;">
@@ -50,23 +59,22 @@ export default defineComponent({
         </div>
 
         <div class="flex m-1 justify-center items-baseline mt-4 mb-4">
-            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="this.increment">+</button>
+            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="increment">+</button>
             <span class="m-2">
-                {{ this.countSingleItem }}
+                {{ countSingleItem }}
             </span> 
-            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" :disabled="(this.countSingleItem <= 0)" @click="decrement">-</button>    
+            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" :disabled="(countSingleItem <= 0)" @click="decrement()">-</button>    
         </div>
         <hr>
-        <div v-if="this.countSingleItem > 0">
+        <div class="text-3xl text-center p-5" v-if="countSingleItem > 0">
             {{ priceSelectedItem(item.price) }}$
-        </div>
-        
+        </div>      
+
         <div class="flex justify-center p-8">
             <button 
-            class="bg-cyan-600 p-4 rounded-md cursor-not-allowed"
-            :class="{'cursor-not-allowed': this.countSingleItem <= 0 }"
-
-            :disabled="(this.countSingleItem <= 0)" @click="sendItemToCart(item)">
+            class="bg-cyan-600 p-4 rounded-md"
+            @click="sendItemToCart(item)"
+            :disabled="(countSingleItem <= 0)" >
                 Add To Cart
             </button>
         </div>

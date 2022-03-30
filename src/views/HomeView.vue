@@ -1,58 +1,33 @@
-<script lang="ts">
-import { useCartStore } from '../stores/cart'
-import { mapState , mapActions } from 'pinia'
+<script lang="ts" >
 import Item from '../components/item.vue'
 import { useProductStore } from '../stores/product'
 
-export default {
+export default  {
     components: { Item },
-    data() {
+    setup() {
+        const productStore = useProductStore()
+        const products = productStore. getAllProducts()
+
         return {
-        };
-    },
-    watch() {
+            productStore,
+            products
+        }
     },
     methods: {
-        ...mapActions(useCartStore, ['addToCart']),
+        addProductToCart(item: any) {
+            this.productStore.addItemToCart(item)
+        },
     },
-    computed: {
-        ...mapState(useProductStore, ["products"]),
-    }
 }
 </script>
 
 
 <template>    
     <section class="py-10">
-        <div class="flex justify-between justify-items-start flex-wrap">
-            <div class="" v-for="item of products">
-                <Item :item="item" @item="addToCart(item)" />
-            </div>
+        <div class="flex w-full justify-around justify-items-start flex-wrap">
+            <Item v-for="item of products" :item="item" @item="addProductToCart(item)" />
         </div>
 
     </section>
 </template>
 
-<style scoped>
-
-section{
-    display: flex;
-    justify-content: center;
-}
-
-.allItems{
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-.card{
-    margin: 1rem ;
-    padding: 1rem;
-    border: 1px solid grey;
-    width: 17rem;
-}
-
-.card img {
-    width: 100%
-}
-</style>

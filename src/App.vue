@@ -3,45 +3,34 @@ import { RouterLink, RouterView } from 'vue-router'
 import { mapState } from 'pinia'
 import { useCartStore } from './stores/cart'
 
+// export default {
+//   data() {
+//     return {
+//       show: true,
+//     }
+//   },
+//   methods: {
+//     getCart() {
+//       mapState(useCartStore , ["getStatusCart"])
+//     },
+//     nummberofItemsSelectedToSpan() {
+//       mapState(useCartStore , ["getNumberOfItems"])
+//     }
+//   },
+// }
+
 export default {
-  data() {
+  setup() {
+    const cartStore = useCartStore
+
     return {
-      show: true,
-      test: 'Old String ',
-      dataUser: {
-        name: 'paul',
-        age: 25
-      }
+      cartStore
     }
   },
-  watch:{
-    test(old: any , newVal: any) {
-      console.log('old ', old);
-      console.log('new ' , newVal)
-      // console.log(this.$route)
-    }
-  }, 
-  mounted() {
-    
-    // console.log(this.dataUser)
-    // this.dataUser.age = 55
-    // console.log(this.dataUser)
-  },
-
-  methods: {
-    getCart() {
-      mapState(useCartStore , ['getStatusCart'])
-    },
-    getRut() {
-      // console.log(this.$route)
-      this.dataUser.age++;
-      console.log(this.dataUser)
-      this.test = 'New strinf in Get ' + this.dataUser.age
-
-    }
-  },
+  method: {
+ 
+  }
 }
-
 </script>
 
 <template>
@@ -52,11 +41,10 @@ export default {
         <RouterLink class="m-5" activeClass="active " to="/contact">Contact</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/our-store">Our stores</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/employee">Our Employee</RouterLink>
-        <RouterLink class="m-5" activeClass="active" to="/cart" v-on:click="getRut()">Cart</RouterLink>
-
+        <RouterLink class="m-5" activeClass="active" to="/cart">Cart</RouterLink>
       </nav>
       <div> 
-          <RouterLink  activeClass="active" to="/login" v-if="show">Login</RouterLink>
+        <RouterLink  activeClass="active" to="/login" v-if="this.show">Login</RouterLink>
           <button v-else >
             <span>
               <i></i>
