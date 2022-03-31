@@ -4,28 +4,34 @@ import contactFormVue from '../components/contactForm.vue';
 
 
 export default {
-
   components: {formTestVue , contactFormVue}
 }
 
 </script>
 
 <template>
-  <main>
+  <section class="p-10">
+        <div class="test">
+          <section class="gap-8 columns-3" >
+          
+            <div class="w-full"></div>
+            <div class="w-full"></div>
+            <div class="w-full"></div>
 
-      <div>
-        <!-- <formTestVue /> -->
-      </div>
-      <div>
-        <contactFormVue />
-      </div>
-  </main>
+          </section>
+          <!-- <contactFormVue /> -->
+        
+        </div>
+  </section>
 </template>
 
 
 <style scoped>
-main {
-  padding: 2rem;
-}
 
+  .test div {
+    height: 10rem;
+    width: 10rem;
+    background-color: bisque;
+    border: 1px solid black;
+  }
 </style>

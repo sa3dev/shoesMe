@@ -33,7 +33,7 @@ export default {
 
 <template>
     <div>
-        <table class="table">
+        <table class="w-full table mx-auto p-10">
             <thead>
                 <tr>
                     <th>Employee name</th>
