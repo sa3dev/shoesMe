@@ -1,14 +1,20 @@
 <script lang="ts">
 import { useCartStore } from './stores/cart'
+import { useUserStore } from './stores/user'
 
 export default {
   setup() {
     const cartStore = useCartStore()
+    const userStore = useUserStore()
     const itemsInCart = cartStore.numberOfItemsInCart
-
+    const checkIsUserAuth = userStore.isUserAuth
+    
     return {
       cartStore,
-      itemsInCart
+      userStore,
+
+      itemsInCart,
+      checkIsUserAuth
     }
   },
   
@@ -17,16 +23,19 @@ export default {
 
 <template>
   <header>
-    <div class="flex flex-wrap p-1 items-center justify-between  p-4">
+    <div class="flex flex-wrap p-1 items-center justify-between p-4 ">
       <nav>
         <RouterLink class="m-5 " activeClass="active" to="/" >Home</RouterLink>
         <RouterLink class="m-5" activeClass="active " to="/contact">Contact</RouterLink>
-        <RouterLink class="m-5" activeClass="active" to="/our-store">Our stores</RouterLink>
+        <!-- <RouterLink class="m-5" activeClass="active" to="/our-store">Our stores</RouterLink> -->
         <RouterLink class="m-5" activeClass="active" to="/employee">Our Employee</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/cart">Cart </RouterLink>
       </nav>
-      <div> 
-        <RouterLink  activeClass="active" to="/login">Login</RouterLink>
+      <div > 
+        <RouterLink activeClass="active" to="/login">Login</RouterLink>
+      </div>
+      <div>
+        <button @click="userStore.logout()">Logout</button>
       </div>
     </div>
   </header>

@@ -1,47 +1,18 @@
 <script lang="ts">
-const LoginSuccess = { mail: "sadev" , password: '1234'}
+import { useUserStore } from '@/stores/user'
+import { mapActions , mapState } from 'pinia'
 
 export default {
 
     data() {
         return {
-            loginText: '',
-            passw: '',
+            loginText: 'sadev',
+            passw: '1234',
             isActive: Boolean
         }
     },
     methods: {
-        loginTest(mail: string , pass: string ) {
-            console.log('test login => '+ mail ,pass)
-            try {
-                const user = this.checkLogin(mail , pass)
-                user?.then((test) => {
-                    console.log(test)
-
-                    return this.$router.push({ name: 'login', query: { redirect: '/path' } })
-                })
-                .catch(err => console.log(err))
-                
-                
-            } catch (error) {
-                console.log(error)
-            }
-        },
-
-        checkLogin(userText: string , passText: string ) {
-            if(userText === LoginSuccess.mail && passText === LoginSuccess.password) {
-                const obj = {
-                    user: LoginSuccess.mail,
-                    isAdmin: false,
-                }
-                return new Promise((resolve , reject) => {
-                    return resolve(obj)
-                })
-            }else { 
-
-            }
-            
-        }
+         ...mapActions(useUserStore, ["login"]),
     },
 }
 
@@ -64,7 +35,7 @@ export default {
                 <div class="flex justify-center">
                     <button
                         class="font-mono text-center py-5 px-8 bg-teal-700 rounded text-center"
-                        @click="loginTest(loginText , passw)"> 
+                        @click="login(loginText , passw)"> 
                         
                         Login 
                     </button>

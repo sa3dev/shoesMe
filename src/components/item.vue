@@ -45,8 +45,6 @@ export default defineComponent({
 <template>
     <div class="rounded overflow-hidden shadow-lg p-5 m-6 border border-indigo-600 relative overflow-visible " >
 
-
-
         <h2 class="text-center p-3">{{  item.name }}</h2>
         <div style="width: 100%;">
             <img src="/images/image1.jpg" style="width:100%" >

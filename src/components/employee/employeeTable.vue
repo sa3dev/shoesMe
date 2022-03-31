@@ -54,13 +54,13 @@ export default {
                     <td v-else>{{ employe.email }}</td>
 
                     <td v-if="editing === employe.id">
-                        <button @click="editEmployee(employe)">Save</button>
-                        <button class="muted-button" @click="cancelEdit(employe)">Cancel</button>
+                        <button class="btn-modif edit" @click="editEmployee(employe)">Save</button>
+                        <button class="muted-button btn-modif delete" @click="cancelEdit(employe)">Cancel</button>
                     </td>
 
                     <td v-else>
-                        <button @click="editMode(employe)">Edit</button>
-                        <button @click="$emit('delete:employe' , employe.id)" >Delete</button>
+                        <button class="btn-modif edit" @click="editMode(employe)">Edit</button>
+                        <button class="btn-modif delete" @click="$emit('delete:employe' , employe.id)" >Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -71,5 +71,16 @@ export default {
 <style scoped>
 section{
     padding: 1rem;   
+}
+
+.btn-modif {
+    padding: 0.3rem 1rem;
+    border-radius: 3px;
+}
+.edit {
+    background-color: rgb(221, 163, 54);
+}
+.delete {
+    background-color: rgb(241, 93, 93);
 }
 </style>

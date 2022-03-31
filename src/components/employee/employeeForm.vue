@@ -85,24 +85,32 @@ export default {
                 @focus="clearStatus"
                 @keypress="clearStatus">
           
-            <button class="btn is-primary ">Ajouter employee</button>
+            <button class="btn is-primary">Ajouter employee</button>
 
         </form>
-        <p class="success-message" v-if="success">Good , employee registered</p>
-        <p class="error-message" v-if="error && submitting ">There is an error </p>
+        <p class="success-message" v-if="success">Good , employee registered <span class="cross" @click="error = false">X</span></p>
+        <p class="error-message" v-if="error && submitting ">There is an error <span class="cross" @click="error = false">X</span> </p>
     </div>
 </template>
 
 
 <style scoped>
 .employe-form {
-
     width: 100%;
     margin: 0 auto;
 }
 
 form {
     margin-bottom: 2rem;
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0;
+}
+
+input {
+    border: 1px solid black ;
+    padding: 0.8rem;
+    width: 80%;
 }
 
 [class*='-message'] {
@@ -110,16 +118,22 @@ form {
 }
 
 .error-message {
+    position: relative;
     color: #d33c40;
     border: 1px solid #d33c40 ;
     padding: 1rem;
 }
-
+.cross {
+    position: absolute ;
+    right: 1rem;
+}
 .success-message {
+    position: relative;
     color: #32a95d;
     border: 1px solid #32a95d ;
     padding: 1rem;
 }
+
 
 
 </style>
