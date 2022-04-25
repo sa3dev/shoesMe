@@ -9,26 +9,26 @@ export const useUserStore = defineStore({
     }),
     actions: {
         login(mail: string , passw: string) {
-
+            
             if(mail === loginSuccess.mail && passw === loginSuccess.password ) {
-                const testUserInLocalStorage = localStorage.getItem('userData') || null;
                 const obj = {
                     user: mail ,
-                    isAdmin: false
+                    isAdmin: true
                 }
-                if( testUserInLocalStorage === null) {
-                    this.user = obj
-
-                    this.$router.push('/')
-                } else {
-                    this.user = JSON.parse(testUserInLocalStorage)
-                }
+            
+                localStorage.setItem('userData' , JSON.stringify(obj))
+                                    
+                localStorage.getItem('userData') !== null ? this.$router.push('/') :  window.confirm('Error in log. Please retry')
             }
         },
         logout() {
             localStorage.removeItem('userData')
             this.user = undefined
-            this.$router.push('/login')
+
+            let answer = window.confirm('Want to log out ?')
+            if(answer) {
+                this.$router.push('/')
+            }
         }
     },
     getters: {

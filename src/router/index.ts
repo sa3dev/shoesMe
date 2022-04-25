@@ -1,40 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const useContact = import('./../views/ContactView.vue')
-const useHome    = import('./../views/HomeView.vue')
-
-
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => useHome
-    },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: () => useContact
-    },
-    {
-      path: '/our-store',
-      name: 'stores',
-      component: () => import('../views/StoreView.vue')
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: () => import('../views/CartView.vue')
-    },
-    {
-      path: '/login',
-      component: () => import('../views/LoginView.vue')
-    },
-    {
-      path: '/employee',
-      component: () => import('../views/EmployeView.vue')
-    }
+    { path: '/',      name: 'home', component: () => import('./../views/HomeView.vue') },
+    { path: '/cart',  name: 'cart', component: () => import('../views/CartView.vue') },
+    { path: '/login', name: 'login',component: () => import('../views/LoginView.vue') },
+    { path: '/employee', name: 'employe' , component: () => import('../views/EmployeView.vue')}
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top

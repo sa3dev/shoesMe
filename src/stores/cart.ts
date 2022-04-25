@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useCartStore = defineStore({
-    id: 'cart',
+export const useCartStore = defineStore( 'cart' ,{
     state :()=>({
         numberOfItem: 0,
         cart: []
@@ -10,6 +9,10 @@ export const useCartStore = defineStore({
         numberOfItemsInCart: (state) => { 
             return state.cart.reduce(( acc , val ) => acc + val.numberOfItem, 0)
         }, 
+        getStatusCart: (state) => {
+            return state.cart.length>0 ? true : false
+        }
+
       },
     actions: {
         addNumberOfItem() {
@@ -29,9 +32,6 @@ export const useCartStore = defineStore({
             const i = this.cart.lastIndexOf(item)
             if (i > -1) this.cart.splice(i, 1)
         },
-        getStatusCart() {
-            return this.cart.length>0 ? true : false
-        }
-    }
-
+      
+    },
 })

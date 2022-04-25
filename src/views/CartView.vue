@@ -3,15 +3,18 @@ import { mapActions , mapState } from 'pinia'
 import { useCartStore } from '../stores/cart'
 
 export default {
+    setup(){
+        let cartStore = useCartStore()
+        
+        return {
+            cartStore
+        }
+    },
     data() {
         return {
             counterItem: 0,
             countSingleItemSelected: 0,
         };
-    },
-    methods: {
-        ...mapActions(useCartStore, ["resetCart"]),  
-        ...mapActions(useCartStore, ["removeItemFromCart"])  
     },
     computed: {
         ...mapActions(useCartStore , ['getCart']),
@@ -24,7 +27,10 @@ export default {
 
     <h2>Card resume</h2>
         <div class="resumeCart" v-if="getCart && getCart.length">
-            <button @click="resetCart" >Reset Cart</button>
+            <button 
+            
+            @click="cartStore.resetCart()" 
+            >Reset Cart</button>
 
             <div class="cart" v-for="item of getCart">
                 <ul>
@@ -34,10 +40,8 @@ export default {
                          </p>
                          <span>-</span>  
                          <p>{{ item.price }}$</p>   
-                         <button @click="removeItemFromCart(item)"> Remove </button>  
-                    
+                         <button @click="cartStore.removeItemFromCart(item)"> Remove </button>  
                     </li>
-                         
                 </ul>
 
                 <div class="total-resume">
@@ -53,7 +57,7 @@ export default {
 </template>
 
 
-<style>
+<style scoped>
 
 .cart {
     border: 1px solid lightgrey ;

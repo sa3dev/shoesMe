@@ -8,11 +8,10 @@ export default {
         return {
             loginText: 'sadev',
             passw: '1234',
-            isActive: Boolean
         }
     },
     methods: {
-         ...mapActions(useUserStore, ["login"]),
+        ...mapActions(useUserStore, ["login"]),
     },
 }
 
