@@ -1,54 +1,11 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { useCartStore } from "@/stores/cart";
-import { defineComponent } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
-    props: ['item'],
-    emits: ['countSingleItem' , 'item'] , 
-    setup(prop , context) {
-        
+defineProps(['item'])
+let countItem = ref(0)
+const cartStore = useCartStore()
 
-        let cartStore = useCartStore()
-        return{
-            cartStore
-        }
-    },
-    data() {
-        return {
-            countSingleItem: 0
-        }
-    },
-    methods:{
-        priceSelectedItem( price: number ) {
-            return price * +(this.countSingleItem)
-        },
-        increment() {
-            this.countSingleItem++
-            this.$emit('countSingleItem')
-        },
-        decrement(){
-            this.countSingleItem--
-            this.$emit('countSingleItem')
-        }, 
-        sendItemToCart(item: any) {
-            item.numberOfItem = this.countSingleItem
-            this.$emit( 'item' , {
-                name: item.name,
-                imgUrl: item.imgUrl,
-                price: item.price,
-                numberOfItem: item.numberOfItem
-            })
-            this.countSingleItem = 0;
-        }
-    },
-    computed: {
-        notAllowedCursor() {
-            return {
-                'cursor-not-allowed' : this.countSingleItem < 0
-            }
-        }
-    },
-})
 </script>
 
 <template>
@@ -69,25 +26,28 @@ export default defineComponent({
 
         <!-- ITEM COUNT ITEM -->
         <div class="flex m-1 justify-center items-baseline mt-4 mb-4">
-            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="increment">+</button>
+            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" @click="countItem++">+</button>
             <span class="m-2">
-                {{ countSingleItem }}
+                {{ countItem }}
             </span> 
-            <button class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" :disabled="(countSingleItem <= 0)" @click="decrement()">-</button>    
+            <button 
+                class="bg-indigo-500 p-3 rounded-md w-12 cursor-pointer" 
+                :disabled="(countItem <= 0)" 
+                @click="countItem--">-</button>    
         </div>
         <hr>
 
         <!-- PRICE SELECTED ITEM  -->
-        <div class="text-3xl text-center p-5" v-if="countSingleItem > 0">
-            {{ priceSelectedItem(item.price) }}$
+        <div class="text-3xl text-center p-5" v-if="countItem > 0">
+            {{countItem * item.price }}$
         </div>      
 
-        <!-- SEND ITEM TO CART @click="sendItemToCart(item)"-->
+        <!-- SEND ITEM TO CART -->
         <div class="flex justify-center p-8">
             <button 
             class="bg-cyan-600 p-4 rounded-md"
-            @click="cartStore.addToCart(item) ; countSingleItem = 0;"
-            :disabled="(countSingleItem <= 0)" >
+            @click="cartStore.addToCart(item , countItem); countItem = 0"
+            :disabled="(countItem <= 0)" >
                 Add To Cart
             </button>
         </div>

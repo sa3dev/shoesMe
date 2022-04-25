@@ -29,7 +29,7 @@ pinia.use(({ store , options }) => {
     //     store.msg = msg   // msg sera dispo dans les stores
     // }
 
-    console.log(options)
+    // console.log(options)
 
     store.$router = markRaw(router)
 });

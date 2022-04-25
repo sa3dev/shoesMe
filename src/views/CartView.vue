@@ -28,7 +28,7 @@ export default {
     <h2>Card resume</h2>
         <div class="resumeCart" v-if="getCart && getCart.length">
             <button 
-            
+            class="btnReset"
             @click="cartStore.resetCart()" 
             >Reset Cart</button>
 
@@ -85,4 +85,11 @@ export default {
     margin: 1rem auto;
 }
 
+.btnReset {
+    display: flex;
+    margin: 0 auto;
+    background: cadetblue;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+}
 </style>

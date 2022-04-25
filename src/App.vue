@@ -1,23 +1,7 @@
-<script lang="ts">
-import { useCartStore } from './stores/cart'
+<script lang="ts" setup>
 import { useUserStore } from './stores/user'
-import { storeToRefs } from 'pinia'
+const userStore = useUserStore()
 
-export default {
-  setup() {
-    const cartStore = useCartStore()
-    const userStore = useUserStore()
-
-    let { isUserAuth } = storeToRefs(userStore)
-    
-    return {
-      cartStore,
-      userStore,
-      isUserAuth
-    }
-  },
-  
-}
 </script>
 
 <template>
@@ -28,11 +12,11 @@ export default {
         <RouterLink class="m-5" activeClass="active" to="/employee">Our Employee</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/cart" >Cart </RouterLink>
       </nav>
-      <div > 
+      <div v-if="!userStore.isUserConnected"> 
         <RouterLink activeClass="active" to="/login">Login</RouterLink>
       </div>
-      <div >
-        <button @click="userStore.logout()">Logout</button>
+      <div v-if="userStore.isUserConnected">
+        <button @click="userStore.logout() ">Logout</button>
       </div>
     </div>
   </header>

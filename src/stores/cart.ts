@@ -12,15 +12,19 @@ export const useCartStore = defineStore( 'cart' ,{
         getStatusCart: (state) => {
             return state.cart.length>0 ? true : false
         }
-
       },
     actions: {
-        addNumberOfItem() {
-            if(this.numberOfItem <=0) return
-            this.numberOfItem++
-        },
-        addToCart(item: any) {
-            this.cart.push(item)
+        addToCart(item: any , numberOfItemSelected: number ) {
+
+            const newItem = {
+                ...item
+            }
+            newItem.numberOfItem = numberOfItemSelected
+            newItem.totalPrice = newItem.price * newItem.numberOfItem
+
+            this.numberOfItem > 0 ? this.numberOfItem + numberOfItemSelected : this.numberOfItem = numberOfItemSelected
+
+            this.cart.push(newItem)
         },
         getCart() {
             return this.cart
