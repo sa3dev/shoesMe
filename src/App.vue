@@ -1,16 +1,24 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
+import { useCartStore } from './stores/cart';
 import { useUserStore } from './stores/user'
 const userStore = useUserStore()
+const cartStore = useCartStore()
+
+const { numberOfItemsInCart } = storeToRefs(cartStore)
 
 </script>
 
 <template>
   <header>
-    <div class="flex flex-wrap p-1 items-center justify-between p-4 ">
+    <div class="flex flex-wrap items-center justify-between p-4 ">
       <nav>
         <RouterLink class="m-5" activeClass="active" to="/" >Home</RouterLink>
         <RouterLink class="m-5" activeClass="active" to="/employee">Our Employee</RouterLink>
-        <RouterLink class="m-5" activeClass="active" to="/cart" >Cart </RouterLink>
+        <RouterLink class="m-5 cart" activeClass="active" to="/cart">
+          Cart  <span v-if="numberOfItemsInCart>0" class="nmbItemToCart">{{numberOfItemsInCart}}</span>
+        </RouterLink> 
+       
       </nav>
       <div v-if="!userStore.isUserConnected"> 
         <RouterLink activeClass="active" to="/login">Login</RouterLink>

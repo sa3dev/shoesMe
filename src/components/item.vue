@@ -9,16 +9,20 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-    <div class="rounded overflow-hidden shadow-lg p-5 m-6 border border-indigo-600 relative overflow-visible " >
+    <div class="rounded overflow-hidden shadow-lg m-6 border border-indigo-600 relative min-w-xs" >
 
         <!-- ITEM IMAGE  -->
-        <h2 class="text-center p-3">{{  item.name }}</h2>
+        <!-- <div class="hover:translate-y-6" >
+            <h2 class="text-center p-3 hover:translate-y-6" >{{  item.name }}</h2>
+        </div> -->
         <div style="width: 100%;">
-            <img src="/images/image1.jpg" style="width:100%" >
+            <img src="/images/image2.jpg" style="width:330px" class="rounded-t-lg">
+            <h2 class="text-center p-3" >{{  item.name }}</h2>
+
         </div>     
 
         <!-- ITEM PRICE -->
-        <div class="absolute -bottom-8 right-4 hover:right-6">
+        <div class="absolute -bottom-8 right-4 hover:right-6 tr">
             <div class="bg-orange-400 text-white px-8 py-4 border border-indigo-600 ">
                 <span class="">{{ item.price }} $ </span>
             </div>
