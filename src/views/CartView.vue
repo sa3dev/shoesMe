@@ -1,51 +1,45 @@
-<script lang="ts">
-import { mapActions , mapState } from 'pinia'
+<script setup lang="ts">
 import { useCartStore } from '../stores/cart'
+import { computed } from 'vue'
 
-export default {
-    setup(){
-        let cartStore = useCartStore()
-        
-        return {
-            cartStore
-        }
-    },
-    data() {
-        return {
-            counterItem: 0,
-            countSingleItemSelected: 0,
-        };
-    },
-    computed: {
-        ...mapActions(useCartStore , ['getCart']),
-    }
+const cartStore = useCartStore()
+
+const totalOfItemsPrice = (price: number , number: number ): number => {
+    return price * number
 }
+
+const totl = computed((price: number , numberItem: number)=> price * numberItem)
+defineExpose({
+    totalOfItemsPrice,
+    totl
+})
 </script>
 
 <template>
     <section>
 
     <h2>Card resume</h2>
-        <div class="resumeCart" v-if="getCart && getCart.length">
+        <div class="resumeCart" v-if="cartStore.getCart() && cartStore.cart.length">
             <button 
             class="btnReset"
             @click="cartStore.resetCart()" 
             >Reset Cart</button>
 
-            <div class="cart" v-for="item of getCart">
+            <div class="cart mt-10" v-for="item of cartStore.cart" >
                 <ul>
-                    <li class="cart-detail"> 
+                {{ typeof item.price }}
+                    <li class="cart-detail mt-2" > 
                          <p>
-                         {{item.numberOfItem}} x {{item.name}}
+                         {{item.name}} x {{item.numberOfItem}} 
                          </p>
-                         <span>-</span>  
-                         <p>{{ item.price }}$</p>   
+                         <span style="margin:auto">-</span>  
+                         <p> Price: {{ item.price }}$</p>   
                          <button @click="cartStore.removeItemFromCart(item)"> Remove </button>  
                     </li>
                 </ul>
 
                 <div class="total-resume">
-                    total {{item.price * item.numberOfItem}}$
+                    total {{ totalOfItemsPrice( item.price , item.numberOfItem) }}$
                 </div>
 
             </div>

@@ -27,6 +27,8 @@ export default {
     },
     methods: {
         handleSubmitEmploye() {
+            console.log('TEST dU THISS/////////////////// Employé Form')
+            console.log(this)
             this.submitting = true;
 
             if(this.invalidName || this.invalidMail) {

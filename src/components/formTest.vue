@@ -10,9 +10,9 @@ export default {
         }
     },
     computed: {
-        filteredNames() {
-            return this.names.filter((n) =>
-                n.toLowerCase().startsWith(this.prefix.toLowerCase())
+        filteredNames(): string {
+            return this.names.filter((name) =>
+                name.toLowerCase().startsWith(this.prefix.toLowerCase())
             )
         }
     },

@@ -23,6 +23,7 @@ pinia.use(({ store , options }) => {
     // les options sera réellement l'objet en question du store
     // console.log(store , options)
 
+    // Ici on pourra donc verifier si une propriété est disponible dans tel ou tel store automatiquement
     // if(options.usePlugin) {
     //     let msg = ref('Hi from plugin')
     //     store.$state.msg = msg // msg sera dispo avec les alias $msg
@@ -31,6 +32,7 @@ pinia.use(({ store , options }) => {
 
     // console.log(options)
 
+    // on attache a chaque store le $router
     store.$router = markRaw(router)
 });
 

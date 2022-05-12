@@ -1,7 +1,7 @@
 export interface Item {
-    name: String,
-    imgUrl: String,
-    price: Number,
-    numberOfItem: Number,
-    totalPrice: Number
+    name: string,
+    imgUrl: string,
+    price: number,
+    numberOfItem: number,
+    totalPrice: number
 }

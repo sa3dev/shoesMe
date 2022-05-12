@@ -1,4 +1,3 @@
-import { useCartStore } from './cart';
 import { defineStore } from 'pinia';
 import type { Item } from '@/models/item';
 
@@ -34,10 +33,6 @@ export const useProductStore = defineStore({
     actions: {
         getAllProducts(){
             return this.products
-        },
-        addItemToCart(item: any) {
-            const cartStore = useCartStore();
-            cartStore.addToCart(item);
         }
     },
 })

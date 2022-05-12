@@ -1,7 +1,13 @@
 import { defineStore } from "pinia";
+import type { Item } from "./../models/item";
+
+export type RootCartState = {
+    numberOfItem: number,
+    cart: Item[]
+  };
 
 export const useCartStore = defineStore( 'cart' ,{
-    state :()=>({
+    state: (): RootCartState =>({
         numberOfItem: 0,
         cart: []
     }),
@@ -14,25 +20,25 @@ export const useCartStore = defineStore( 'cart' ,{
         }
       },
     actions: {
-        addToCart(item: any , numberOfItemSelected: number ) {
+        addToCart(item: any, numberOfItemSelected: number ): void {
 
-            const newItem = {
+            const newItem: Item = {
                 ...item
             }
             newItem.numberOfItem = numberOfItemSelected
-            newItem.totalPrice = newItem.price * newItem.numberOfItem
+            newItem.totalPrice = newItem.price ?  newItem.price * newItem.numberOfItem : 0
 
             this.numberOfItem > 0 ? this.numberOfItem + numberOfItemSelected : this.numberOfItem = numberOfItemSelected
 
             this.cart.push(newItem)
         },
-        getCart() {
+        getCart(): Item[] {
             return this.cart
         },
-        resetCart() {
+        resetCart(): void {
             return this.$reset()
         },
-        removeItemFromCart(item: any){
+        removeItemFromCart(item: Item): void{
             const i = this.cart.lastIndexOf(item)
             if (i > -1) this.cart.splice(i, 1)
         },

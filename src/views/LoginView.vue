@@ -1,28 +1,35 @@
-<script lang="ts">
-import { useUserStore } from '@/stores/user'
-import { mapActions , mapState } from 'pinia'
+<script setup lang="ts">
 
-export default {
+import { ref } from 'vue';
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore()
 
-    data() {
-        return {
-            loginText: 'sadev',
-            passw: '1234',
-        }
-    },
-    methods: {
-        ...mapActions(useUserStore, ["login"]),
-    },
+const loginText = ref('sadev')
+const passw = ref('1234')
+
+// On déclare dans le setup notre submitHandler qu'on expose a la vue :)
+const onSubmitTest = async () => {
+    await userStore.login(loginText.value , passw.value)
 }
 
+// Expose 
+defineExpose({
+    onSubmitTest
+})
 
 </script>
+
 
 <template>
     <section>
     
         <div class="py-8">
-            <form  class="max-w-20 rounded bg-aliceblue shadow-lg p-10 " @submit.prevent >
+            <form 
+                autocomplete="on" 
+                class="max-w-20 rounded bg-aliceblue shadow-lg p-10 " 
+                @submit.prevent="onSubmitTest()">
+
+
                 <h2>Login  <span> ( loginSucss : "sadev" , password: '1234 )</span></h2>
                 
                 <label for="">E-mail</label>
@@ -30,12 +37,11 @@ export default {
 
                 <label label for="">Password</label>
                 <input class="w-full border-2  border-black-400" type="text" v-model="passw">
-
+                
                 <div class="flex justify-center">
                     <button
-                        class="font-mono text-center py-5 px-8 bg-teal-700 rounded text-center"
-                        @click="login(loginText , passw)"> 
-                        
+                        type="submit"
+                        class="font-mono py-5 px-8 bg-teal-700 rounded text-center"> 
                         Login 
                     </button>
                 </div>
