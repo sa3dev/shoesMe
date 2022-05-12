@@ -9,7 +9,7 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-    <div class="rounded overflow-hidden shadow-lg m-6 border border-indigo-600 relative min-w-xs" >
+    <div class="rounded overflow-visible shadow-lg m-6 border border-indigo-600 relative min-w-xs" >
 
         <!-- ITEM IMAGE  -->
         <!-- <div class="hover:translate-y-6" >
