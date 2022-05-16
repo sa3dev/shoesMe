@@ -1,0 +1,19 @@
+{
+  "name": "shoes&#39;me",
+  "version": "0.0.1",
+  "description": "e-commerce for shoes to choose :)",
+  "main": "index.js",
+  "authors": {
+    "name": "sa3dev",
+    "email": "sa33dev@gmail.com"
+  },
+  "repository": "https://github.com/sa3dev/shoesMe/shoes&#39;me",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
